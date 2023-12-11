@@ -9,6 +9,7 @@ Mosaic Mind is a compassionate association dedicated to nurturing an inclusive c
 Our mission is to provide a platform where neurodiversity is not just accepted but celebrated. 
 
 We run a network of support groups all over the UK, offering a safe space for sharing experiences, learning, and growing together.
+This site provides access to online meetings in your local area through our event management system.
 
 
 # Features
