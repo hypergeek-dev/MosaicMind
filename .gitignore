@@ -125,4 +125,4 @@ yarn.lock
 # Windows specific files
 Thumbs.db
 
-history/
+.history/
