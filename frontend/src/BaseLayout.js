@@ -23,7 +23,7 @@ function BaseLayout({ children }) {
             </main>
 
             <footer>
-                {/* Footer content */}
+
             </footer>
         </div>
     );
