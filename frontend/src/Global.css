@@ -1,1 +1,78 @@
+/* Home.css */
 
+body {
+    background-color:#98BAB2;
+}
+.hero {
+    position: relative;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .hero-image {
+    width: 100%; /* Adjust the width as needed for the typical hero-image size */
+    height: 60vh; /* Automatically adjust the height to maintain aspect ratio */
+  }
+  
+  .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .hero .btn {
+    color: #140000; 
+    background-color: #DAAC7D; 
+    border: none;
+    cursor: pointer;
+    display: inline-block; 
+   
+    width: 10vw;
+  }
+  
+  .hero .btn:hover {
+    background-color: #c99876; 
+  }
+  
+  .emperor {
+ width:2vw;
+ height: 2vh;
+    color: #524D4C;
+  
+  }
+  .tumbleweed {
+    width:2vw;
+    height: 2vh;
+       color:  #DAAC7D;
+       
+     }
+     .summer_green  {
+        width:2vw;
+        height: 2vh;
+           color:  #98BAB2;
+           
+         }
+
+          .hippie_blue {
+            width:2vw;
+            height: 2vh;
+               color:  #6399B3
+          }
+
+          .hero_overlay_text{
+            opacity: 0.5;
+            background-color: #ffffff;
+            font-size: larger;
+            color: #140000;
+            position: absolute;
+            padding: 2vw;
+            top: 20vh;
+            left: 65vw;
+            border-radius: 15px;
+          }
+
+          .home_text_box {
+            width:30vw; 
+          }
