@@ -7,7 +7,7 @@ const MeetingListAll = () => {
 
     useEffect(() => {
     
-        axios.get('/eventmanager/meeting_list_all/')
+        axios.get('/meeting_list_all/')
             .then(response => {
                 setMeetings(response.data);
             })
