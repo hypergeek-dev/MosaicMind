@@ -11,9 +11,10 @@ function BaseLayout({ children }) {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Link className="nav-link text-dark" to="/templates/home">Home</Link>
-                        <Link className="nav-link text-dark" to="/templates/about-us">About Us</Link>
-                        <Link className="nav-link text-dark" to="/templates/volunteer">Volunteer</Link>
+                        <Link className="nav-link text-dark" to="/">Home</Link>
+                        <Link className="nav-link text-dark" to="/meeting_list_all">Meetings</Link>
+                        <Link className="nav-link text-dark" to="/aboutus">About Us</Link>
+                        <Link className="nav-link text-dark" to="/volunteer">Volunteer</Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
