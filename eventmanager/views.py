@@ -48,7 +48,7 @@ def edit_meeting(request):
     except Meeting.DoesNotExist:
         data = {'error': 'Meeting not found'}
         
-def meeting_list(request):
+def MeetingListAll(request):
     if request.method == 'GET':
     
         meetings = Meeting.objects.all()
