@@ -24,7 +24,7 @@ body {
   
   .hero .btn {
     color: #140000; 
-    background-color: #DAAC7D; 
+    background-color: #6399B3; 
     border: none;
     cursor: pointer;
     display: inline-block; 
@@ -33,7 +33,7 @@ body {
   }
   
   .hero .btn:hover {
-    background-color: #c99876; 
+    background-color: #4b778d; 
   }
   
   .emperor {
