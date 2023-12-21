@@ -1,22 +1,26 @@
 from django.db import models
 import uuid
+import datetime
+from django.conf import settings
+from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 
-class User(models.Model):
-    f_name = models.CharField(max_length=100)
-    l_name = models.CharField(max_length=100)
-    alias = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # If you're using django-phonenumber-field
     phone_number = PhoneNumberField(blank=True)
 
     def __str__(self):
-        return f"{self.f_name} {self.l_name}"  
+        return self.user.username
+
 
 class Meeting(models.Model):
-    meeting_id = models.CharField(max_length=100, default=uuid.uuid4, unique=True)
+    meeting_id = models.CharField(
+        max_length=100, default=uuid.uuid4, unique=True)
     name = models.CharField(max_length=100, default="Mosaic Minds Meeting")
     meeting_time = models.TimeField(default=datetime.time(12, 0))
-        
+
     WEEKDAY = (
         ('SUN', 'Sunday'),
         ('MON', 'Monday'),
@@ -26,7 +30,7 @@ class Meeting(models.Model):
         ('FRI', 'Friday'),
         ('SAT', 'Saturday'),
     )
-    
+
     AREA_CHOICES = (
         ('CI', 'Channel Islands Area'),
         ('CTV', 'Chiltern & Thames Valley Area'),
@@ -66,7 +70,6 @@ class Meeting(models.Model):
     area = models.CharField(max_length=20, choices=AREA_CHOICES, default='CI')
     description = models.TextField(default="Standard meeting description.")
     online_meeting_url = models.URLField(default="www.google.com")
-
     # ForeignKey relationship to the User model
     added_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
