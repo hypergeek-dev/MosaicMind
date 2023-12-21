@@ -21,8 +21,8 @@ function App() {
                     <Route path="/add-meeting" element={<AddMeeting />} />
                     <Route path="/edit-meeting" element={<EditMeeting />} />
                     <Route path="/meetingfinder" element={<MeetingFinder />} />
-                    <Route path="/meeting-list-query" element={<MeetingListQuery />} />
-                    <Route path="/meeting-list-all" element={<MeetingListAll />} />
+                    <Route path="/meeting_list_query" element={<MeetingListQuery />} />
+                    <Route path="/meeting_list_all" element={<MeetingListAll />} />
                     <Route path="/volunteer" element={<Volunteer />} />
                 </Routes>
             </BaseLayout>
