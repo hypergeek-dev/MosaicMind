@@ -3,6 +3,8 @@
         "corsheaders",
         "eventmanager",
         "modelfields",
+        "mosaicminds",
+        "neurodiversity",
         "phonenumber"
     ]
     
