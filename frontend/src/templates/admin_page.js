@@ -8,7 +8,7 @@
             <div class="card-body">
               <h5 class="card-title">Virtual meeting</h5>
               <p class="card-text">Time: <span class="meeting-time">[Time]</span></p>
-              <p class="card-text">Online Link: <a href="#" class="meeting-link">[Link]</a></p>
+              <p class="card-text">Online Link: <span class="meeting-link">[Link]</span></p>
               <p class="card-text">Description: <span class="meeting-description">[Description]</span></p>
             </div>
           </div>
