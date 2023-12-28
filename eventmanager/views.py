@@ -49,22 +49,27 @@ def edit_meeting(request):
             'description': meeting.description,
             'online_meeting_url': meeting.online_meeting_url,
         }
+        return JsonResponse(data) 
     except Meeting.DoesNotExist:
         data = {'error': 'Meeting not found'}
+        return JsonResponse(data)
 
 
 def MeetingListAll(request):
     if request.method == 'GET':
-
         meetings = Meeting.objects.all()
 
         meetings_data = [
             {
-                'meeting_id': meeting.id,
+                'id': meeting.id,
+                'meeting_id': meeting.meeting_id,
                 'name': meeting.name,
+                'meeting_time': meeting.meeting_time.strftime("%H:%M"),
                 'area': meeting.area,
                 'description': meeting.description,
-                'onlineMeetingUrl': meeting.online_meeting_url,
+                'online_meeting_url': meeting.online_meeting_url,
+                'added_by_id': meeting.added_by_id,
+               
             }
             for meeting in meetings
         ]
@@ -72,6 +77,7 @@ def MeetingListAll(request):
         return JsonResponse(meetings_data, safe=False)
 
     return JsonResponse({'error': 'Invalid request method'}, status=400)
+
 
 
 def register(request):
