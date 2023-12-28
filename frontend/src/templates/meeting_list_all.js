@@ -1,22 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 
 const MeetingListAll = () => {
     const [meetings, setMeetings] = useState([]);
-    const [error, setError] = useState(null);  // New state for error
+    const [isLoading, setIsLoading] = useState(true); 
+    const [error, setError] = useState(null);
 
     useEffect(() => {
+        setIsLoading(true); 
         axios.get('/meeting_list_all/')
             .then(response => {
                 setMeetings(response.data);
+                setIsLoading(false); 
             })
             .catch(error => {
                 console.error('Error fetching meetings:', error);
-                setError(error);  
+                setError(error);
+                setIsLoading(false); 
             });
     }, []);
-   
+
+    if (isLoading) {
+        return (
+            <Container className="mt-4 text-center">
+                <Spinner animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                </Spinner>
+            </Container>
+        );
+    }
+
     if (error) {
         return (
             <Container className="mt-4">
