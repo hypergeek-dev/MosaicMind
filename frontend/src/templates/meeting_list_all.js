@@ -1,32 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Card, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, Card, Spinner, Alert } from 'react-bootstrap';
 import axios from 'axios';
+
+const fetchMeetings = async () => {
+    try {
+        const response = await axios.get('/meeting_list_all/');
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
 
 const MeetingListAll = () => {
     const [meetings, setMeetings] = useState([]);
-    const [isLoading, setIsLoading] = useState(true); 
+    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        setIsLoading(true); 
-        axios.get('/meeting_list_all/')
-            .then(response => {
-                setMeetings(response.data);
-                setIsLoading(false); 
+        setIsLoading(true);
+        fetchMeetings()
+            .then(data => {
+                setMeetings(data);
+                setIsLoading(false);
             })
             .catch(error => {
                 console.error('Error fetching meetings:', error);
                 setError(error);
-                setIsLoading(false); 
+                setIsLoading(false);
             });
     }, []);
 
     if (isLoading) {
         return (
             <Container className="mt-4 text-center">
-                <Spinner animation="border" role="status">
-                    <span className="sr-only">Loading...</span>
-                </Spinner>
+                <Spinner animation="border" role="status" />
+                <p>Loading meetings...</p>
             </Container>
         );
     }
@@ -34,11 +42,9 @@ const MeetingListAll = () => {
     if (error) {
         return (
             <Container className="mt-4">
-                <Row>
-                    <Col>
-                        <p>There was an error fetching the meetings. Please try again later.</p>
-                    </Col>
-                </Row>
+                <Alert variant="danger">
+                    There was an error fetching the meetings: {error.message}
+                </Alert>
             </Container>
         );
     }
@@ -47,8 +53,8 @@ const MeetingListAll = () => {
         <Container className="mt-4">
             <Row>
                 {meetings.length > 0 ? (
-                    meetings.map((meeting, index) => (
-                        <Col key={index} md={4} className="mb-3">
+                    meetings.map(meeting => (
+                        <Col key={meeting.id} md={4} className="mb-3">
                             <Card>
                                 <Card.Body>
                                     <Card.Title>{meeting.name}</Card.Title>
@@ -70,7 +76,7 @@ const MeetingListAll = () => {
                     ))
                 ) : (
                     <Col>
-                        <p>No meetings available.</p>
+                        <Alert variant="info">No meetings are currently available.</Alert>
                     </Col>
                 )}
             </Row>
