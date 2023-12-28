@@ -9,7 +9,7 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = env.bool('DEBUG', default=False)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 DATABASES = {
     'default': env.db(),
@@ -106,3 +106,6 @@ LOGIN_URL = '/login/'
 # settings.py
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+DEBUG = True
+
