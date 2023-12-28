@@ -63,9 +63,15 @@ Proprietary and confidential.
 
 # Development
 
-## ![About Us](https://raw.githubusercontent.com/hypergeek-dev/MosaicMind/main/static/wireframes/aboutus.webp/aboutus.webp)
-![Admin](https://raw.githubusercontent.com/hypergeek-dev/MosaicMind/main/static/wireframes/aboutus.webp/admin.webp)
-![CRUD Meeting](https://raw.githubusercontent.com/hypergeek-dev/MosaicMind/main/static/wireframes/aboutus.webp/editmeeting.webp)
-![Find Meeting](https://raw.githubusercontent.com/hypergeek-dev/MosaicMind/main/static/wireframes/aboutus.webp/findmeeting.webp)
-![Landing Page](https://raw.githubusercontent.com/hypergeek-dev/MosaicMind/main/static/wireframes/aboutus.webp/landingpage.webp)
-![Volunteer](https://raw.githubusercontent.com/hypergeek-dev/MosaicMind/main/static/wireframes/aboutus.webp/volunteer.webp)
+## Website Color Scheme
+
+The color scheme for the website is inspired by the hero image and consists of the following colors:
+
+<p>
+  <span style="background-color: rgb(206, 196, 163); padding: 10px; display: inline-block; margin-right: 10px;">Light Beige<br>RGB(206, 196, 163)</span>
+  <span style="background-color: rgb(28, 38, 47); padding: 10px; display: inline-block; margin-right: 10px;">Dark Slate Gray<br>RGB(28, 38, 47)</span>
+  <span style="background-color: rgb(81, 111, 119); padding: 10px; display: inline-block; margin-right: 10px;">Dim Gray<br>RGB(81, 111, 119)</span>
+  <span style="background-color: rgb(189, 134, 92); padding: 10px; display: inline-block; margin-right: 10px;">Pale Taupe<br>RGB(189, 134, 92)</span>
+  <span style="background-color: rgb(121, 70, 56); padding: 10px; display: inline-block; margin-right: 10px;">Sienna<br>RGB(121, 70, 56)</span>
+</p>
+
