@@ -126,3 +126,4 @@ yarn.lock
 Thumbs.db
 
 *history/
+.vscode/settings.json
