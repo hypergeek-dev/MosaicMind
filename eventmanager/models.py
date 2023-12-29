@@ -20,6 +20,7 @@ class Meeting(models.Model):
         max_length=100, default=uuid.uuid4, unique=True)
     name = models.CharField(max_length=100, default="Mosaic Minds Meeting")
     meeting_time = models.TimeField(default=datetime.time(12, 0))
+    approved = models.BooleanField(default=False)
 
     WEEKDAY = (
         ('SUN', 'Sunday'),
