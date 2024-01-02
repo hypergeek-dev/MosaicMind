@@ -8,7 +8,6 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # If you're using django-phonenumber-field
     phone_number = PhoneNumberField(blank=True)
 
     def __str__(self):
@@ -71,7 +70,6 @@ class Meeting(models.Model):
     area = models.CharField(max_length=20, choices=AREA_CHOICES, default='CI')
     description = models.TextField(default="Standard meeting description.")
     online_meeting_url = models.URLField(default="www.google.com")
-    # ForeignKey relationship to the User model
     added_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
