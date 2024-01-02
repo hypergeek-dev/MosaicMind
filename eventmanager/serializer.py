@@ -7,11 +7,16 @@ class MeetingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Meeting
-        fields = ['name', 'area', 'description', 'online_meeting_url', 'added_by_username']
+        fields = [
+            'meeting_id', 'name', 'meeting_time', 'approved', 'area',
+            'description', 'online_meeting_url', 'added_by', 'added_by_username'
+        ]
+        extra_kwargs = {'added_by': {'read_only': True}}
 
     def get_added_by_username(self, obj):
         return obj.added_by.username if obj.added_by else None
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id', 'username', 'email']  
+
+    def create(self, validated_data):
+        # Assuming 'request.user' is the currently logged-in user
+        validated_data['added_by'] = self.context['request'].user
+        return Meeting.objects.create(**validated_data)

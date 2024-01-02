@@ -7,6 +7,8 @@ from .models import Meeting, User
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializer import MeetingSerializer, UserSerializer
+from django.http import JsonResponse
+
 
 
 def index(request):
@@ -26,8 +28,28 @@ def add_meeting(request):
 
 
 def meeting_finder(request):
-    data = {'message': '204 No Content'}
-    return JsonResponse(data)
+    # Get query parameters
+    name = request.GET.get('name')
+    meeting_time = request.GET.get('meeting_time')
+    area = request.GET.get('area')
+
+    # Filter based on the provided parameters
+    meetings_query = Meeting.objects.all()
+
+    if name:
+        meetings_query = meetings_query.filter(name__icontains=name)
+    if meeting_time:
+        # Adjust the format of meeting_time if necessary to match your model
+        meetings_query = meetings_query.filter(meeting_time=meeting_time)
+    if area:
+        meetings_query = meetings_query.filter(area=area)
+
+    # Serialize the meetings
+    serializer = MeetingSerializer(meetings_query, many=True)
+
+    # Return the serialized data
+    return JsonResponse(serializer.data, safe=False)
+
 
 
 def volunteer(request):
@@ -36,48 +58,21 @@ def volunteer(request):
 
 
 def edit_meeting(request):
-
     meeting_id = request.GET.get('meeting_id')
-
     try:
         meeting = Meeting.objects.get(id=meeting_id)
-
-        data = {
-            'meeting_id': meeting.meeting_id,
-            'name': meeting.name,
-            'area': meeting.area,
-            'description': meeting.description,
-            'online_meeting_url': meeting.online_meeting_url,
-        }
-        return JsonResponse(data) 
+        serializer = MeetingSerializer(meeting)
+        return JsonResponse(serializer.data)
     except Meeting.DoesNotExist:
-        data = {'error': 'Meeting not found'}
-        return JsonResponse(data)
+        return JsonResponse({'error': 'Meeting not found'}, status=404)
 
 
 def MeetingListAll(request):
     if request.method == 'GET':
         meetings = Meeting.objects.all()
-
-        meetings_data = [
-            {
-                'id': meeting.id,
-                'meeting_id': meeting.meeting_id,
-                'name': meeting.name,
-                'meeting_time': meeting.meeting_time.strftime("%H:%M"),
-                'area': meeting.area,
-                'description': meeting.description,
-                'online_meeting_url': meeting.online_meeting_url,
-                'added_by_id': meeting.added_by_id,
-               
-            }
-            for meeting in meetings
-        ]
-
-        return JsonResponse(meetings_data, safe=False)
-
+        serializer = MeetingSerializer(meetings, many=True)
+        return JsonResponse(serializer.data, safe=False)
     return JsonResponse({'error': 'Invalid request method'}, status=400)
-
 
 
 def register(request):
@@ -114,7 +109,6 @@ class MeetingList(APIView):
         meetings = Meeting.objects.all()
         serializer = MeetingSerializer(meetings, many=True)
         return Response(serializer.data)
-
 
 class UserList(APIView):
     def get(self, request, format=None):

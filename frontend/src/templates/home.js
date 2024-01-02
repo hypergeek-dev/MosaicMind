@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import heroImage from '../static/images/banner.webp';
 import '../Global.css';
 
@@ -20,8 +19,7 @@ const Home = () => {
               </p>
             </div>
             <div className="col text-center button-box">
-              {/* Your button goes here */}
-              <Link to="/meetinglist" className="btn btn-primary btn-lg">Find Meeting</Link>
+              <a href="/meetingfinder" className="btn btn-primary btn-lg">Search Meetings</a>
             </div>
             <div className="col text-center">
               <h2 className="header">Why We Do It</h2>

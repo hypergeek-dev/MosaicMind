@@ -1,78 +1,37 @@
-import React, { useState } from 'react';
-import { Form, Button, Row, Col, Container } from 'react-bootstrap';
+import React from 'react';
+import heroImage from '../static/images/banner.webp';
+import '../Global.css';
 
-const MeetingSearchForm = ({ onSearch }) => {
-    const [searchCriteria, setSearchCriteria] = useState({
-        day: '',
-        time: '',
-        type: ''
-    });
-
-    const handleChange = (e) => {
-        setSearchCriteria({ ...searchCriteria, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        onSearch(searchCriteria);
-    };
-
-    return (
-        <Container>
-            <Form onSubmit={handleSubmit}>
-                <Row>
-                    <Col md={4}>
-                        <Form.Group controlId="formDay">
-                            <Form.Label>Day</Form.Label>
-                            <Form.Control 
-                                as="select" 
-                                name="day" 
-                                value={searchCriteria.day} 
-                                onChange={handleChange}
-                            >
-                                <option value="">Select a Day</option>
-                                {/* Add day options here */}
-                            </Form.Control>
-                        </Form.Group>
-                    </Col>
-
-                    <Col md={4}>
-                        <Form.Group controlId="formTime">
-                            <Form.Label>Time</Form.Label>
-                            <Form.Control 
-                                as="select" 
-                                name="time" 
-                                value={searchCriteria.time} 
-                                onChange={handleChange}
-                            >
-                                <option value="">Select Time</option>
-                                {/* Add time options here */}
-                            </Form.Control>
-                        </Form.Group>
-                    </Col>
-
-                    <Col md={4}>
-                        <Form.Group controlId="formType">
-                            <Form.Label>Type</Form.Label>
-                            <Form.Control 
-                                as="select" 
-                                name="type" 
-                                value={searchCriteria.type} 
-                                onChange={handleChange}
-                            >
-                                <option value="">Select Type</option>
-                                {/* Add type options here */}
-                            </Form.Control>
-                        </Form.Group>
-                    </Col>
-                </Row>
-
-                <Button variant="primary" type="submit">
-                    Search
-                </Button>
-            </Form>
-        </Container>
-    );
+const Home = () => {
+  return (
+    <div>
+      <section className="hero">
+        <img src={heroImage} alt="Hero" className="hero-image" />
+        <div className="col text-center hero_overlay_text text-box">
+          <p>"Diversity: the art of thinking independently together." <br></br> - Malcolm Forbes</p>
+        </div>
+        <div className="container mt-4">
+          <div className="row">
+            <div className="col text-center text-box">
+              <h2 className="header">What We Are</h2>
+              <p className="content home_text_box">
+                <strong>Mosaic Minds</strong> is a UK-wide network celebrating neurodiversity, connecting unique minds in a supportive online community. We offer a spectrum of events, from educational workshops to creative meet-ups, fostering a space where every neurodiverse individual can thrive. Our platform is a sanctuary for connection, learning, and growth, where each voice is heard and every story is valued. Together, we are redefining neurodiversity, championing understanding, acceptance, and empowerment.
+              </p>
+            </div>
+            <div className="col text-center button-box">
+              <a href="/meetingfinder/" className="btn btn-primary btn-lg">Search Meetings</a>
+            </div>
+            <div className="col text-center">
+              <h2 className="header">Why We Do It</h2>
+              <p className="content home_text_box">
+                At Mosaic Minds, we're driven by the untapped potential within the neurodiverse community. Our mission is to illuminate and celebrate neurodiversity, creating an environment where every individual flourishes. Through shared experiences and mutual support, we're building a future where neurodiversity is recognized as a unique advantage. We're not just envisioning a more inclusive world; we're actively crafting it, one event and one connection at a time.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 };
 
-export default MeetingSearchForm;
+export default Home;
