@@ -5,7 +5,6 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = PhoneNumberField(blank=True)
@@ -13,10 +12,9 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-
 class Meeting(models.Model):
     meeting_id = models.CharField(
-        max_length=100, default=uuid.uuid4, unique=True)
+        max_length=100, default=uuid.uuid4, unique=True, editable=False)
     name = models.CharField(max_length=100, default="Mosaic Minds Meeting")
     meeting_time = models.TimeField(default=datetime.time(12, 0))
     approved = models.BooleanField(default=False)
@@ -66,15 +64,21 @@ class Meeting(models.Model):
         ('WM', 'West Midlands Area'),
         ('WY', 'West Yorkshire'),
         ('YH', 'Yorkshire & Humberside Area'),
-    )
+   )
     area = models.CharField(max_length=20, choices=AREA_CHOICES, default='CI')
     description = models.TextField(default="Standard meeting description.")
-    online_meeting_url = models.URLField(default="www.google.com")
+    online_meeting_url = models.URLField(default="http://www.example.com")
     added_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='meetings'
     )
+
+    class Meta:
+        permissions = (
+            ("can_approve_meeting", "Can approve meetings"),
+            ("can_create_meeting", "Can create meetings"),
+        )
 
     def __str__(self):
         return self.name
