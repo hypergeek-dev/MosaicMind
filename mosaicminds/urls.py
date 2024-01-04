@@ -2,7 +2,7 @@ from django.urls import path
 from eventmanager import views
 
 urlpatterns = [
-    
+    path('', views.home, name='home'),    
     path('index/', views.index, name='index'),
     path('about_us/', views.about_us, name='about_us'),
     path('add_meeting/', views.add_meeting, name='add_meeting'),
@@ -15,4 +15,4 @@ urlpatterns = [
     path('users/', views.UserList.as_view(), name='users'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
-]
+    ]
