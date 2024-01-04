@@ -31,3 +31,4 @@ function App() {
 }
 
 export default App;
+//add 404 page

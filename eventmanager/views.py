@@ -8,7 +8,18 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializer import MeetingSerializer, UserSerializer
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required, user_passes_test
 
+def admin_check(user):
+    return user.is_staff or user.is_superuser
+
+@login_required
+@user_passes_test(admin_check)
+def admin_page(request):
+    if request.method == 'GET':
+
+        return JsonResponse({'message': 'Admin Page Content'})
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 
 
@@ -29,26 +40,22 @@ def add_meeting(request):
 
 
 def meeting_finder(request):
-    # Get query parameters
     name = request.GET.get('name')
     meeting_time = request.GET.get('meeting_time')
     area = request.GET.get('area')
 
-    # Filter based on the provided parameters
+
     meetings_query = Meeting.objects.all()
 
     if name:
         meetings_query = meetings_query.filter(name__icontains=name)
     if meeting_time:
-        # Adjust the format of meeting_time if necessary to match your model
         meetings_query = meetings_query.filter(meeting_time=meeting_time)
     if area:
         meetings_query = meetings_query.filter(area=area)
 
-    # Serialize the meetings
     serializer = MeetingSerializer(meetings_query, many=True)
 
-    # Return the serialized data
     return JsonResponse(serializer.data, safe=False)
 
 def meeting_detail(request, meeting_id):
@@ -58,7 +65,7 @@ def meeting_detail(request, meeting_id):
             'name': meeting.name,
             'description': meeting.description,
             'moreInfoUrl': meeting.online_meeting_url,
-            # Include other fields as needed
+      
         }
         return JsonResponse(data)
     except Meeting.DoesNotExist:
@@ -87,16 +94,14 @@ def MeetingListAll(request):
     return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 
-def register(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('dashboard')
-    else:
-        form = UserCreationForm()
-    return render(request, 'registration/register.html', {'form': form})
+class RegisterView(APIView):
+    def post(self, request):
+        serializer = UserCreationSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            # Create Token here
+            return Response({"message": "User created successfully"}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 def user_login(request):
