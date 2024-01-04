@@ -67,7 +67,7 @@ class Meeting(models.Model):
    )
     area = models.CharField(max_length=20, choices=AREA_CHOICES, default='CI')
     description = models.TextField(default="Standard meeting description.")
-    online_meeting_url = models.URLField(default="http://www.example.com")
+    online_meeting_url = models.URLField(default="http://www.google.com")
     added_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
