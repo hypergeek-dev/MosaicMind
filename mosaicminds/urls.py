@@ -4,12 +4,12 @@ from eventmanager import views
 urlpatterns = [
     
     path('index/', views.index, name='api_index'),
-    path('about-us/', views.about_us, name='api_about_us'),
-    path('add-meeting/', views.add_meeting, name='api_add_meeting'),
-    path('meeting-finder/', views.meeting_finder, name='api_meeting_finder'),
+    path('about_us/', views.about_us, name='api_about_us'),
+    path('add_meeting/', views.add_meeting, name='api_add_meeting'),
+    path('meeting_finder/', views.meeting_finder, name='api_meeting_finder'),
     path('volunteer/', views.volunteer, name='api_volunteer'),
-    path('edit-meeting/', views.edit_meeting, name='api_edit_meeting'),
-    path('meeting-list-all/', views.MeetingListAll, name='api_meeting_list_all'),
+    path('edit_meeting/', views.edit_meeting, name='api_edit_meeting'),
+    path('meeting_list_all/', views.MeetingListAll, name='meeting_list_all'),
 
   
     path('meetings/', views.MeetingList.as_view(), name='api_meetings'),
