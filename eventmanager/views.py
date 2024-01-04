@@ -9,6 +9,10 @@ from rest_framework.response import Response
 from .serializer import MeetingSerializer, UserSerializer
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("Welcome to the MosaicMind app!")
 
 def admin_check(user):
     return user.is_staff or user.is_superuser
@@ -106,14 +110,17 @@ class RegisterView(APIView):
 
 def user_login(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
+        data = json.loads(request.body)
+        username = data.get('username')
+        password = data.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
             login(request, user)
-            return redirect('dashboard')
+            return JsonResponse({'message': 'Login successful'})
+        else:
+            return JsonResponse({'error': 'Invalid credentials'}, status=400)
     else:
-        form = AuthenticationForm()
-    return render(request, 'registration/login.html', {'form': form})
+        return JsonResponse({'error': 'Invalid request method'}, status=400)
 
 
 def user_logout(request):
