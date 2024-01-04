@@ -20,3 +20,8 @@ class MeetingSerializer(serializers.ModelSerializer):
         # Assuming 'request.user' is the currently logged-in user
         validated_data['added_by'] = self.context['request'].user
         return Meeting.objects.create(**validated_data)
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'first_name', 'last_name']
