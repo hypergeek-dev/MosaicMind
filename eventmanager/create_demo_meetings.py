@@ -33,6 +33,6 @@ for user, name in zip(users, meeting_names):
         meeting_time=datetime.time(random.randint(8, 18), random.choice([0, 30])),
         area=random.choice([choice[0] for choice in Meeting.AREA_CHOICES]),
         description="Generated meeting description.",
-        online_meeting_url="http://example.com/meeting/" + str(uuid.uuid4()),
+        online_meeting_url="http://www.google.com" + str(uuid.uuid4()),
         added_by=user
     )
