@@ -11,6 +11,7 @@ from django.http import JsonResponse
 
 
 
+
 def index(request):
 
     data = {'message': '204 No Content '}
@@ -50,7 +51,18 @@ def meeting_finder(request):
     # Return the serialized data
     return JsonResponse(serializer.data, safe=False)
 
-
+def meeting_detail(request, meeting_id):
+    try:
+        meeting = Meeting.objects.get(meeting_id=meeting_id)
+        data = {
+            'name': meeting.name,
+            'description': meeting.description,
+            'moreInfoUrl': meeting.online_meeting_url,
+            # Include other fields as needed
+        }
+        return JsonResponse(data)
+    except Meeting.DoesNotExist:
+        return JsonResponse({'error': 'Meeting not found'}, status=404)
 
 def volunteer(request):
     data = {'message': '204 No Content'}
