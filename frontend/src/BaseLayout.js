@@ -1,4 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.css';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -7,42 +6,42 @@ import { Navbar, Nav, Form, FormControl, Button, Row, Col } from 'react-bootstra
 function BaseLayout({ children }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/login/', {
+            // Send a POST request to the login endpoint with username and password
+            const response = await axios.post('http://127.0.0.1:8000/login/', {
                 username: username,
                 password: password
             });
             console.log(response.data);
-    
-      
+
+            // Redirect based on user type (assuming response.data contains isAdmin)
             if (response.data.isAdmin) {
-                navigate('/admin_page'); 
+                navigate('/admin_page');
             } else {
-                navigate('/dashboard'); 
+                navigate('/dashboard');
             }
         } catch (error) {
             console.error("There was an error logging in the user!", error);
         }
     };
-    
 
     return (
         <div>
-
-<Navbar bg="body-tertiary" expand="lg" variant="dark">
-                <Navbar.Brand href="/" className="text-dark">Navbar</Navbar.Brand>
+            {/* Navbar */}
+            <Navbar bg="body-tertiary" expand="lg" variant="dark">
+                <Navbar.Brand as={Link} to="/" className="text-dark">Navbar</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <Link className="nav-link text-dark" to="/">Home</Link>
-                        <Link className="nav-link text-dark" to="/meeting_list_all">Meetings</Link>
-                        <Link className="nav-link text-dark" to="/aboutus">About Us</Link>
-                        <Link className="nav-link text-dark" to="/feedback">Feedback</Link>
-                        <Link className="nav-link text-dark" to="/volunteer">Volunteer</Link>
+                        <Nav.Link as={Link} to="/" className="text-dark">Home</Nav.Link>
+                        <Nav.Link as={Link} to="/meeting_list_all" className="text-dark">Meetings</Nav.Link>
+                        <Nav.Link as={Link} to="/aboutus" className="text-dark">About Us</Nav.Link>
+                        <Nav.Link as={Link} to="/feedback" className="text-dark">Feedback</Nav.Link>
+                        <Nav.Link as={Link} to="/volunteer" className="text-dark">Volunteer</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
                 <div className="d-flex justify-content-end">
@@ -76,11 +75,13 @@ function BaseLayout({ children }) {
                 </div>
             </Navbar>
 
+            {/* Main Content */}
             <main>
                 {children}
             </main>
 
-            {/* ... Footer ... */}
+            {/* Footer */}
+            {/* Add your footer code here */}
         </div>
     );
 }
