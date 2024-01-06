@@ -49,7 +49,7 @@ ROOT_URLCONF = 'mosaicminds.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'frontend/build')],  
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
