@@ -12,7 +12,7 @@ function BaseLayout({ children }) {
         event.preventDefault();
         try {
             // Send a POST request to the login endpoint with username and password
-            const response = await axios.post('http://127.0.0.1:8000/login/', {
+            const response = await axios.post('https://2200-hypergeekdev-mosaicmind-ldowkfntf5v.ws-eu107.gitpod.io/login/', {
                 username: username,
                 password: password
             });
