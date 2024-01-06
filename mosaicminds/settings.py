@@ -110,9 +110,8 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = 'login/'  
 
-# settings.py
+Access-Control-Allow-Origin: https://mosaicminds-1df2672b33ce.herokuapp.com
 
-CORS_ALLOW_ALL_ORIGINS = True
 
 # Security settings
 SECURE_HSTS_SECONDS = 3600  # or more
