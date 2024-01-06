@@ -14,4 +14,8 @@ urlpatterns = [
     path('users/', views.UserList.as_view(), name='users'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
+    re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
     ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
