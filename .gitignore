@@ -107,8 +107,6 @@ yarn-error.log
 package-lock.json
 yarn.lock
 
-# Frontend build directory
-/build/
 
 # IDE specific settings
 .idea/
