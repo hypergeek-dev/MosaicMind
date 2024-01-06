@@ -110,7 +110,10 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = 'login/'  
 
-Access-Control-Allow-Origin: https://mosaicminds-1df2672b33ce.herokuapp.com
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = [
+    'https://mosaicminds-1df2672b33ce.herokuapp.com',
+    ]
 
 
 # Security settings
