@@ -1,7 +1,7 @@
 from django.urls import path
 from eventmanager import views
 from django.urls import path, re_path
-from django.views.generic import TemplateVie
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('index/', views.index, name='index'),
