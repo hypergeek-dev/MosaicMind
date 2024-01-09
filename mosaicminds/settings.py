@@ -110,10 +110,17 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = 'login/'  
 
+# Allow all origins in development
 CORS_ALLOW_ALL_ORIGINS = True
-#CORS_ALLOWED_ORIGINS = [
-#    "*mosaicminds-1df2672b33ce.herokuapp.com",
-#]
+
+CORS_ALLOWED_ORIGINS = [
+   "https://mosaicminds-1df2672b33ce.herokuapp.com",
+   'https://3000-hypergeekdev-mosaicmind-r9yema2kw28.ws-eu107.gitpod.io',
+]
+
+CSRF_TRUSTED_ORIGINS = ["https://mosaicminds-1df2672b33ce.herokuapp.com",
+   'https://3000-hypergeekdev-mosaicmind-r9yema2kw28.ws-eu107.gitpod.io',
+]
 
 # Security settings
 # SECURE_HSTS_SECONDS = 3600  # or more
